@@ -1,9 +1,8 @@
-
 // File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol
 
 // SPDX-License-Identifier: MIT
 
-pragma solidity >=0.6.2 <0.8.0;
+pragma solidity ^0.6.2;
 
 /**
  * @dev Collection of functions related to the address type
@@ -193,7 +192,8 @@ library Address {
 
 // File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol
 
-pragma solidity >=0.6.0 <0.8.0;
+
+pragma solidity ^0.6.0;
 
 /**
  * @dev Wrappers over Solidity's arithmetic operations with added overflow
@@ -353,7 +353,8 @@ library SafeMath {
 
 // File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol
 
-pragma solidity >=0.6.0 <0.8.0;
+
+pragma solidity ^0.6.0;
 
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
@@ -431,7 +432,7 @@ interface IERC20 {
 
 // File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/SafeERC20.sol
 
-pragma solidity >=0.6.0 <0.8.0;
+pragma solidity ^0.6.0;
 
 
 
@@ -506,7 +507,7 @@ library SafeERC20 {
 
 // File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/TokenTimelock.sol
 
-pragma solidity >=0.6.0 <0.8.0;
+pragma solidity ^0.6.0;
 
 
 /**
@@ -528,12 +529,12 @@ contract TokenTimelock {
     // timestamp when token release is enabled
     uint256 private _releaseTime;
 
-    constructor (IERC20 token_, address beneficiary_, uint256 releaseTime_) public {
+    constructor (IERC20 token, address beneficiary, uint256 releaseTime) public {
         // solhint-disable-next-line not-rely-on-time
-        require(releaseTime_ > block.timestamp, "TokenTimelock: release time is before current time");
-        _token = token_;
-        _beneficiary = beneficiary_;
-        _releaseTime = releaseTime_;
+        require(releaseTime > block.timestamp, "TokenTimelock: release time is before current time");
+        _token = token;
+        _beneficiary = beneficiary;
+        _releaseTime = releaseTime;
     }
 
     /**
