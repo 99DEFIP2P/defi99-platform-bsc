@@ -7,10 +7,10 @@ const Defi99Core = artifacts.require("Defi99Core");
 const JumpRateModel = artifacts.require("JumpRateModel");
 
 // Admin address for deploying dUSDC
-const ADMIN_ADDRESS = "0xD565C800C1611Bed28911D5A819f1E6A9E0d3d7f"
+const ADMIN_ADDRESS = "0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4"
 
 module.exports = async (deployer, network) => {
-    let USDC_TOKEN_ADDRESS = "0x7d0adFbBF7487E50e9A7B57d3DAFea393B400EeD";
+    let USDC_TOKEN_ADDRESS = "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d";
 
     /* Deploy Defi99 USDC */
     await deployer.deploy(
