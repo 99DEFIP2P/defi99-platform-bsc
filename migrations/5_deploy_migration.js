@@ -1,21 +1,25 @@
 require("dotenv").config();
 const verify = require("../src/verify");
 
-const Defi99Plus = artifacts.require("Defi99Plus");
+const Timelock = artifacts.require("Timelock");
 
-// Address for transferring Defi99Plus Token
-const ADMIN_ADDRESS = "0xD565C800C1611Bed28911D5A819f1E6A9E0d3d7f"
+// Admin address for Timelock
+const ADMIN_ADDRESS = "0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4"
 
 module.exports = async (deployer, network) => {
 
-    /* Deploy Defi99Plus Contract */
-    /*await deployer.deploy(Defi99Plus, ADMIN_ADDRESS);
+    /* Deploy Timelock Contract */
+    await deployer.deploy(
+        Timelock,
+        ADMIN_ADDRESS,
+        172800
+    );
 
     if (network !== "development")
         await verify.bscscanVerify(
-            Defi99Plus,
+            Timelock,
             network,
             process.env.BSCSCANAPIKEY,
             1
-        ); */
+        );
 };
