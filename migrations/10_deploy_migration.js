@@ -6,7 +6,7 @@ const Defi99Core = artifacts.require("Defi99Core");
 const JumpRateModel = artifacts.require("JumpRateModel");
 
 // Admin address for deploying dBNB
-const ADMIN_ADDRESS = "0xD565C800C1611Bed28911D5A819f1E6A9E0d3d7f"
+const ADMIN_ADDRESS = "0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4"
 
 module.exports = async (deployer, network) => {
 
