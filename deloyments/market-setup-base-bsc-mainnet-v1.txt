@@ -1,0 +1,70 @@
+
+Add DController (address) as pending implementation in Defi99Core contract from admin account
+Approved the implementation by calling _become (defi99Core address) in DController contract from admin account
+
+USDC Token : 0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d
+USDT Token : 0xe93e5891b1b757D51D20448F2803Db4Cd6f84233 (need to find)
+BAT Token : 0x101d82428437127bf1608f699cd651e6abf9766e
+WBTC Token : 0x3E090FfB054d69c32f8129D55F64B0047224204F (need to find)
+bBZRX Token : 0x6249Cd2d84d9ABB89DD0Ef115Cd334569a50DA8C (need to find)
+LINK Token : 0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd 
+DEFI99 Token : 0xd5cf8d4e332667ded826fdb758a2b3dda98d600b (need to list and add)
+
+dUSDC Token (DErc20USDCDelegator): 0x47103a56E6aDda9441c821f31bf0ddCfC984c6e1
+dBAT Token (DErc20BATDelegator): 0x1e21c7a6e91CB5bcC37cbe22B53f4490a0062C70
+dBNB Token (dBNB): 0x9900b7014f695FE44C0F53f321b9966a11a5A28D
+dLINK Token (DErc20LINKDelegator): 0x69EB11cEC1D7a15d0CBf30c498131F4904895309
+
+Defi99Lens: 0x1213E12cCBf14A748D47454446de682a5fb09a30
+
+    - set reserve factor for dTokens
+        0x47103a56E6aDda9441c821f31bf0ddCfC984c6e1, 50000000000000000
+        0x1e21c7a6e91CB5bcC37cbe22B53f4490a0062C70, 500000000000000000
+        0x9900b7014f695FE44C0F53f321b9966a11a5A28D, 100000000000000000
+        0x69EB11cEC1D7a15d0CBf30c498131F4904895309, 100000000000000000
+        
+Deploy Defi99Plus: 0xea07D03b8bc26B74c8ED82E35708aF69e3FdF143
+    Arg: 0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4, 0xAA5EF9bF7c43A17B412903E6dBB2B4f592b50C5F, 0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4, 0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4, 0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4, 0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4, 1633890600
+
+---------------------------------------------------------------
+
+Setting up the markets (from the admin account)
+
+SimplePriceOracle: 0xE1d3FD646d040f3289dF54D228ccF198974D967c
+
+    - call initaliseTokens (symbols[], address[])
+            ["USDC", "BAT", "BNB", "LINK"], [0x47103a56E6aDda9441c821f31bf0ddCfC984c6e1, 0x1e21c7a6e91CB5bcC37cbe22B53f4490a0062C70, 0x9900b7014f695FE44C0F53f321b9966a11a5A28D, 0x69EB11cEC1D7a15d0CBf30c498131F4904895309]
+
+    - call postPrices(symbols[], prices[])
+            ["USDC", "BAT", "BNB", "LINK"], [1000000000000000000,821300000000000000,429000000000000000000,28970000000000000000]
+
+
+Defi99Core: 0xAA5EF9bF7c43A17B412903E6dBB2B4f592b50C5F (Write as Proxy)
+    - Make this contract as Proxy Contract to access the DController contract as implementation
+    - call _setMaxAssets(maxAssets) to set the maximum numbers assets can be listed in the market
+        10
+    - call _setCloseFactor(closeFactorMantissa) 
+        500000000000000000
+    - call _setDefi99PlusAddress(Defi99PlusContract)
+        0xea07D03b8bc26B74c8ED82E35708aF69e3FdF143
+    - call _setDefi99PlusRate(defi99Rate)
+        176000000000000000
+    - call _setLiquidationIncentive
+        1080000000000000000
+    - call _setPriceOracle(simplePriceOracle) 
+        0xE1d3FD646d040f3289dF54D228ccF198974D967c
+    - call _supportMarket(dToken) to add the dToken to the market
+        0x47103a56E6aDda9441c821f31bf0ddCfC984c6e1
+        0x1e21c7a6e91CB5bcC37cbe22B53f4490a0062C70
+        0x9900b7014f695FE44C0F53f321b9966a11a5A28D
+        0x69EB11cEC1D7a15d0CBf30c498131F4904895309
+    - call _setCollateralFactor(dToken, collateralFactorMantissa)
+        0x47103a56E6aDda9441c821f31bf0ddCfC984c6e1, 750000000000000000
+        0x1e21c7a6e91CB5bcC37cbe22B53f4490a0062C70, 600000000000000000
+        0x9900b7014f695FE44C0F53f321b9966a11a5A28D, 750000000000000000
+        0x69EB11cEC1D7a15d0CBf30c498131F4904895309, 750000000000000000
+
+    - call _addDefi99Markets([dToken]) to make selected the dTokens to be listed in the market
+        [0x47103a56E6aDda9441c821f31bf0ddCfC984c6e1, 0x1e21c7a6e91CB5bcC37cbe22B53f4490a0062C70, 0x9900b7014f695FE44C0F53f321b9966a11a5A28D, 0x69EB11cEC1D7a15d0CBf30c498131F4904895309]
+Defi99Core [Read as Proxy]
+    - Verify whether dTokens are listed in the market by calling getAllMarkets and markets(dToken)
