@@ -7,13 +7,13 @@ const Defi99Core = artifacts.require("Defi99Core");
 const JumpRateModel = artifacts.require("JumpRateModel");
 
 // Admin address for deploying dWBTC
-const ADMIN_ADDRESS = "0xD565C800C1611Bed28911D5A819f1E6A9E0d3d7f"
+const ADMIN_ADDRESS = "0x4089bA22DE13C07Ff418D8f76E90ff1940936CB4"
 
 module.exports = async (deployer, network) => {
     let WBTC_TOKEN_ADDRESS = "0x3E090FfB054d69c32f8129D55F64B0047224204F";
 
     /* Deploy 99defi WBTC */
-    await deployer.deploy(
+    /* await deployer.deploy(
         DErc20WBTCDelegator,
         WBTC_TOKEN_ADDRESS,
         Defi99Core.address,
@@ -33,5 +33,5 @@ module.exports = async (deployer, network) => {
             network,
             process.env.BSCSCANAPIKEY,
             1
-        );
+        ); */
 };
